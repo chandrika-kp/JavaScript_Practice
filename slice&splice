@@ -1,0 +1,28 @@
+slice doesnot change the original array
+slice(start,end)  // start -->index  , end ---> index (exclusive) ------>(index starts from 0)
+let a = [1,2,3,4,5,6,7,8,9]
+let b = a.slice(1)  
+console.log(b)  // [2, 3, 4, 5, 6, 7, 8, 9]
+console.log(a)  // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+   index  0   1   2   3   4   5
+let a = ['a','b','c','g','s','l']
+let b = a.slice(0,3)  // ['a', 'b', 'c']
+
+let b = a.slice(0,3)  //   ['a', 'b', 'c']
+let b = a.slice(0)    //   ['a', 'b', 'c', 'g', 's', 'l']
+let b = a.slice(3)    //   ['g', 's', 'l']
+let b = a.slice(2,5)  //   ['c', 'g', 's']
+let b = a.slice(2,6)  //   ['c', 'g', 's', 'l']
+
+console.log(b)  //  corresponding outputs shown above
+
+console.log(a) // ['a', 'b', 'c', 'g', 's', 'l']  // after slicing the original array doesnot change 
+
+splice(start,howmany deleted?, replacewith this items,item2...)
+splice overwrites the original array
+          0    1    2    3    4    5   6   7   8   
+let c = ['a', 'b', 'c', 'g', 's', 'l','p','y','e']
+let d = c.splice(5,8)  // start from index 5 , delete 8 items ...here from item at index 5 ,only 4 items are there ..so 4 items deleted
+console.log(d)  // [ 'l','p','y','e']
+console.log(c)  // ['a', 'b', 'c', 'g', 's']   ---------> after deletion remaining items will overwrites original array

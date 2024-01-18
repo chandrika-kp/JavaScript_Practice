@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Image Editor</title>
+    <style>
+        /** Zeinab Ramadan; 17/12/2017 **/
+    
+        @import url('https://fonts.googleapis.com/css?family=Raleway');
+    
+        body {
+            color: #2e2e2e;
+            text-align: center;
+            font-family: "Raleway";
+        }
+    
+        .display-img {
+            width: 100%;
+            padding: 1%;
+            border-radius: 50px;
+        }
+    
+        h1 {
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 50px;
+        }
+    
+        .edit {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding: 1% 0;
+        }
+    
+        .edit label {
+            flex-basis: 20%;
+            letter-spacing: 1.5px;
+            font-weight: normal;
+            color: #000;
+            font-weight: bold;
+            text-align: left;
+        }
+    
+        aside {
+            padding: 1%;
+        }
+    
+        .edit input[type="range"] {
+            flex-basis: 45%;
+        }
+    
+        .badge {
+            background-color: #F17082;
+            width: 60px;
+            line-height: 18px;
+        }
+    
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    
+        .display-img {
+            margin: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Fake Image Editor</h1>
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-6 col-sm-6 col-xs-12">
+                <!-- Effects containers -->
+                <div class="edit">
+                    <label for="grayscale">Grayscale</label>
+                    <input type="range" class='range' id="grayscale" min="0" max="100" step="1" value="0">
+                    <span class="badge">0</span>
+                </div>
+
+                <div class="edit">
+                    <label for="blur">Blur</label>
+                    <input type="range" class='range' id="blur" min="0" max="10" step="0.5" value="0">
+                    <span class="badge">0</span>
+                </div>
+
+                <div class="edit">
+                    <label for="rotate">Rotate</label>
+                    <input type="range" class='range' id="rotate" min="0" max="360" step="1" value="0">
+                    <span class="badge">0</span>
+                </div>
+                <div class="edit">
+                    <label for="sepia">Sepia</label>
+                    <input id="sepia" type="range" min="0" max="100" value="0" step="1">
+                    <span class="badge">0</span>
+                </div>
+                <!-- /Effects containers -->
+            </aside>
+
+            <div class="col-md-6 col-sm-6 col-xs-12 img-container">
+                <!-- Set a fixed image source -->
+                <div id="displayPhoto" class="display-img">
+                    <img src="th.jpg" alt="Fixed Image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Effects 
+        (function () {
+            var $grayscale = document.getElementById('grayscale');
+            var $Blur = document.getElementById('blur');
+            var $Rotate = document.getElementById('rotate');
+            var $Sepia = document.getElementById('sepia');
+            var $val = document.getElementsByClassName('badge');
+
+            var $uploadedImg = document.getElementById('displayPhoto');
+
+            var Editor = function () {
+                this.grayscale = function () {
+                    $uploadedImg.style.filter = "grayscale(" + $grayscale.value + "%)";
+                    $val[0].textContent = $grayscale.value + " %";
+                },
+                this.blur = function () {
+                    $uploadedImg.style.filter = "blur(" + $Blur.value + "px)";
+                    $val[1].textContent = $Blur.value + " px";
+                },
+                this.rotate = function () {
+                    $uploadedImg.style.transform = "rotate(" + $Rotate.value + "deg)";
+                    $val[2].textContent = $Rotate.value + " deg";
+                },
+                this.sepia = function () {
+                    $uploadedImg.style.filter = "sepia(" + $Sepia.value + "%)";
+                    $val[3].textContent = $Sepia.value + " %";
+                }
+            };
+
+            var grayscaleEditor = new Editor();
+            var blurEditor = new Editor();
+            var rotateEditor = new Editor();
+            var sepiaEditor = new Editor();
+
+            $grayscale.oninput = function () {
+                grayscaleEditor.grayscale();
+            }
+            $Blur.oninput = function () {
+                blurEditor.blur();
+            }
+            $Rotate.oninput = function () {
+                rotateEditor.rotate();
+            }
+            $Sepia.oninput = function () {
+                sepiaEditor.sepia();
+            }
+
+        })();
+    </script>
+</body>
+
+</html>
